@@ -3,28 +3,6 @@
     //The maximum is inclusive and the minimum is inclusive. used from:
     //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
 
-// // anchor data to the parent element
-var pEl = document.getElementById('movies');
-
-// // create new element
-// var liEl = document.createElement('li');
-
-// // give new element some content
-// liEl.textContent = 'This is my list of items.';
-
-// // append the child element to the parent element
-// pEl.appendChild(liEl);
-
-// var colors = ['red', 'black', 'yellow', 'blue', 'purple'];
-
-// for(var i = 0; i < colors.length; i++){
-//     // create element
-//     var liEl = document.createElement('li');
-//     // give it content
-//     liEl.textContent = `${colors[i]} is the Way`;
-//     // append the child to the parent
-//     pEl.appendChild(liEl);
-// }
 
 var seaObj = {
     maxCust: 65,
@@ -41,21 +19,21 @@ var seaObj = {
         return Math.floor(Math.random() * (max - min + 1)) + min; 
       },
     cookieCalc:function(){    
-        for (i = 0; i < this.hoursOpen; i++){
+        for (var i = 0; i < this.hoursOpen; i++){
             var random = Math.round(this.randomCalc(this.minCust,this.maxCust)*this.avgCookie);
             this.cookieArr.push(random);
         }
         return this.cookieArr;
     },
-    TotCalc: function(){
-        for (i = 0; i < this.cookieArr.length; i++){
+    totCalc: function(){
+        for (var i = 0; i < this.cookieArr.length; i++){
             this.locTot = this.locTot + this.cookieArr[i];
         }
         return this.locTot;
     },
     locArrCalc: function (){
-        this.TotCalc();
-        for (i = 0; i < this.hoursOpen; i++){
+        this.totCalc();
+        for (var i = 0; i < this.hoursOpen; i++){
             if (i < 6){
             this.locArr.push(`${i+6}am: ${this.cookieArr[i]} cookies`)
             }
@@ -78,6 +56,7 @@ seaObj.locArr;
 seaObj.locArrCalc();
 console.log(seaObj.locArr);
 
+    
 var tokObj = {
     maxCust: 24,
     minCust: 3,
@@ -93,21 +72,21 @@ var tokObj = {
         return Math.floor(Math.random() * (max - min + 1)) + min; 
       },
     cookieCalc:function(){    
-        for (i = 0; i < this.hoursOpen; i++){
+        for (var i = 0; i < this.hoursOpen; i++){
             var random = Math.round(this.randomCalc(this.minCust,this.maxCust)*this.avgCookie);
             this.cookieArr.push(random);
         }
         return this.cookieArr;
     },
-    TotCalc: function(){
-        for (i = 0; i < this.cookieArr.length; i++){
+    totCalc: function(){
+        for (var i = 0; i < this.cookieArr.length; i++){
             this.locTot = this.locTot + this.cookieArr[i];
         }
         return this.locTot;
     },
     locArrCalc: function (){
-        this.TotCalc();
-        for (i = 0; i < this.hoursOpen; i++){
+        this.totCalc();
+        for (var i = 0; i < this.hoursOpen; i++){
             if (i < 6){
             this.locArr.push(`${i+6}am: ${this.cookieArr[i]} cookies`)
             }
@@ -130,7 +109,6 @@ tokObj.locArr;
 tokObj.locArrCalc();
 console.log(tokObj.locArr);
 
-
 var dubObj = {
     maxCust: 38,
     minCust: 11,
@@ -146,21 +124,21 @@ var dubObj = {
         return Math.floor(Math.random() * (max - min + 1)) + min; 
       },
     cookieCalc:function(){    
-        for (i = 0; i < this.hoursOpen; i++){
+        for (var i = 0; i < this.hoursOpen; i++){
             var random = Math.round(this.randomCalc(this.minCust,this.maxCust)*this.avgCookie);
             this.cookieArr.push(random);
         }
         return this.cookieArr;
     },
-    TotCalc: function(){
-        for (i = 0; i < this.cookieArr.length; i++){
+    totCalc: function(){
+        for (var i = 0; i < this.cookieArr.length; i++){
             this.locTot = this.locTot + this.cookieArr[i];
         }
         return this.locTot;
     },
     locArrCalc: function (){
-        this.TotCalc();
-        for (i = 0; i < this.hoursOpen; i++){
+        this.totCalc();
+        for (var i = 0; i < this.hoursOpen; i++){
             if (i < 6){
             this.locArr.push(`${i+6}am: ${this.cookieArr[i]} cookies`)
             }
@@ -199,21 +177,21 @@ var parObj = {
         return Math.floor(Math.random() * (max - min + 1)) + min; 
       },
     cookieCalc:function(){    
-        for (i = 0; i < this.hoursOpen; i++){
+        for (var i = 0; i < this.hoursOpen; i++){
             var random = Math.round(this.randomCalc(this.minCust,this.maxCust)*this.avgCookie);
             this.cookieArr.push(random);
         }
         return this.cookieArr;
     },
-    TotCalc: function(){
-        for (i = 0; i < this.cookieArr.length; i++){
+    totCalc: function(){
+        for (var i = 0; i < this.cookieArr.length; i++){
             this.locTot = this.locTot + this.cookieArr[i];
         }
         return this.locTot;
     },
     locArrCalc: function (){
-        this.TotCalc();
-        for (i = 0; i < this.hoursOpen; i++){
+        this.totCalc();
+        for (var i = 0; i < this.hoursOpen; i++){
             if (i < 6){
             this.locArr.push(`${i+6}am: ${this.cookieArr[i]} cookies`)
             }
@@ -252,21 +230,21 @@ var limObj = {
         return Math.floor(Math.random() * (max - min + 1)) + min; 
       },
     cookieCalc:function(){    
-        for (i = 0; i < this.hoursOpen; i++){
+        for (var i = 0; i < this.hoursOpen; i++){
             var random = Math.round(this.randomCalc(this.minCust,this.maxCust)*this.avgCookie);
             this.cookieArr.push(random);
         }
         return this.cookieArr;
     },
-    TotCalc: function(){
-        for (i = 0; i < this.cookieArr.length; i++){
+    totCalc: function(){
+        for (var i = 0; i < this.cookieArr.length; i++){
             this.locTot = this.locTot + this.cookieArr[i];
         }
         return this.locTot;
     },
     locArrCalc: function (){
-        this.TotCalc();
-        for (i = 0; i < this.hoursOpen; i++){
+        this.totCalc();
+        for (var i = 0; i < this.hoursOpen; i++){
             if (i < 6){
             this.locArr.push(`${i+6}am: ${this.cookieArr[i]} cookies`)
             }
@@ -289,3 +267,27 @@ limObj.locArr;
 limObj.locArrCalc();
 console.log(limObj.locArr);
 
+// // anchor data to the parent element
+var seaEl = document.getElementById('sealist');
+var tokEl = document.getElementById('toklist');
+var dubEl = document.getElementById('dublist');
+var parEl = document.getElementById('parlist');
+var limEl = document.getElementById('limlist');
+
+function writeList(objArray, uEl){
+
+    for (var i = 0; i < objArray.length; i++){
+        // create element
+        var liEl = document.createElement('li');
+        // give it content
+        liEl.textContent = ` ${objArray[i]}`;
+        // append the child to the parent
+        uEl.appendChild(liEl);
+    }
+}
+
+writeList(seaObj.locArr, seaEl);
+writeList(tokObj.locArr, tokEl);
+writeList(dubObj.locArr, dubEl);
+writeList(parObj.locArr, parEl);
+writeList(limObj.locArr, limEl);
