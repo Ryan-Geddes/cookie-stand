@@ -136,3 +136,13 @@ var seattleObj = {
         return this.seaArr;
     }
 }
+
+
+//Constructor DEMO
+//variable for a constructor ALWASY starts with a capital letter
+
+function Location(name, dateReleased, episode){
+    this.name = name; //constructors use SEMI COLONS
+    this.dateReleased = dateReleased;
+    this.episode = episode;
+}
