@@ -15,6 +15,7 @@ function Location(max,min,avg,hours,name,elementId){
     this.elementId = document.getElementById(elementId)
     this.cookieArr = [];
     this.locArr = [];
+    // this.cookieCalc(); this will auto generate the instead of having to run the for loop
     locationArr.push(this);
 }
 
@@ -25,8 +26,8 @@ new Location (38,20,2.3,14,'Paris','partab');
 new Location (16,2,4.6,14,'Lima','limtab');
 
 Location.prototype.randomCalc = function(min,max){
-    min = Math.ceil(min);
-    max = Math.floor(max)
+    var min = Math.ceil(min);
+    var max = Math.floor(max)
     return Math.floor(Math.random() * (max - min + 1)) + min; 
 }
 Location.prototype.cookieCalc = function(){
@@ -88,7 +89,7 @@ function hourTotCalc(){
     for (var j = 0; j < counter; j++){
         var hourTotal = 0;
         for (var i = 0; i < locationArr.length; i++){
-            hourTotal = hourTotal + locationArr[i].locArr[j];
+            hourTotal += locationArr[i].locArr[j];
         }
         hourTotArr.push(hourTotal);
     }
