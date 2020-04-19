@@ -12,7 +12,7 @@ function Location(max,min,avg,hours,name,elementId){
     this.hours = hours;
     this.locTot = 0;
     this.name = name;
-    this.elementId = document.getElementById(elementId)
+    this.elementId = elementId;//document.getElementById(elementId)
     this.cookieArr = [];
     this.locArr = [];
     // this.cookieCalc(); this will auto generate the instead of having to run the for loop
@@ -59,26 +59,24 @@ Location.prototype.locArrCalc = function(){
     this.locArr.push(this.locTot)
     return this.locArr;
 }
-Location.prototype.writeList = function(array, elementId){
-    var array = this.locArr;
-    var elementId = this.elementId;
-    var name = this.name;
+Location.prototype.writeList = function(){
+    var row = document.getElementById(this.elementId);
     var tdEl = document.createElement('td');
-    tdEl.textContent = name;
-    elementId.appendChild(tdEl);
-    for (var i = 0; i < array.length; i++){
+    tdEl.textContent = this.name;
+    row.appendChild(tdEl);
+    for (var i = 0; i < this.locArr.length; i++){
         var tdEl = document.createElement('td');
-        tdEl.textContent = array[i];
-        elementId.appendChild(tdEl);
+        tdEl.textContent = this.locArr[i];
+        row.appendChild(tdEl);
 }
 }
-
+//function renderArrays
 for (var i = 0; i < locationArr.length; i++){
     locationArr[i].randomCalc();
     locationArr[i].cookieCalc();
     locationArr[i].locArrCalc();
     locationArr[i].totCalc();
-    locationArr[i].writeList(this.locArr, this.uEl);
+    locationArr[i].writeList();
     console.log(locationArr[i]);
 }
 
@@ -161,9 +159,10 @@ headerWrite(tableHeadArr, 'tabhead');
 // i is the index of the location, 0-5
 // j is the index of the location's array
 // ij   ij   ij   ij   ij   ij
-// 01 + 11 + 21 + 31 + 41 + 51 = new array[0]
-// 02 + 12 + 22 + 32 + 42 + 52 = new array [1]
-// 03 + 13 + 23 + 33 + 43 + 53 = new array [2]
+// 01 + 11 + 21 + 31 + 41 + 51 = new hourlytotalarray[0]
+// 02 + 12 + 22 + 32 + 42 + 52 = new hourlytotalarray[1]
+// 03 + 13 + 23 + 33 + 43 + 53 = new hourlytotalarray[2]
+// etc.
 
 
 // function writeList(objArray, uEl){
@@ -176,3 +175,154 @@ headerWrite(tableHeadArr, 'tabhead');
 //         uEl.appendChild(liEl);
 //     }
 // }
+
+
+
+//New Location Form
+
+
+var userForm = document.getElementById('userForm')
+userForm.addEventListener('submit', handleSubmit); 
+//no parenthesis after handleSubmit function bc it is invoked by the click.
+
+function handleSubmit(event){
+    event.preventDefault();
+
+    var locName = event.target.locName.value;
+    var max = parseInt(event.target.maxCust.value);
+    var min = parseInt(event.target.minCust.value);
+    var avg = parseInt(event.target.avgCookies.value);
+    var hours = parseInt(event.target.hoursOpen.value);
+    var elId = event.target.locName.value;
+    var elId = elId.toLowerCase();
+
+    //we want the forms to clear after hitting submit while still saving the data previously 
+    //entered into our variables.
+    event.target.locName.value = null;
+    event.target.maxCust.value = null;
+    event.target.minCust.value = null;
+    event.target.avgCookies.value = null;
+    event.target.hoursOpen.value = null;
+
+    new Location (max,min,avg,hours,locName,elId);
+    console.log(locationArr);
+    newLocationTrRender(elId);
+    calcNewLoc();
+
+
+}
+function newLocationTrRender(elementId){
+    var table = document.getElementById('table');
+    var newTrEl = document.createElement('tr');
+    newTrEl.setAttribute("id", elementId);
+    newTrEl.textContent = name;
+    table.appendChild(newTrEl);
+
+}
+
+//this function calculates the hourly totals for the new location
+function calcNewLoc(){
+    var i = locationArr.length - 1;
+    locationArr[i].randomCalc();
+    locationArr[i].cookieCalc();
+    locationArr[i].locArrCalc();
+    locationArr[i].totCalc();
+    locationArr[i].writeList();
+}
+
+
+//write this in a new render function
+
+
+// function renderNewLoc(array, elementId){
+//     var array = locationArr;
+// // // anchor data to the parent element
+// var pEl = document.getElementById('movies');
+
+// // // create new element
+//  var liEl = document.createElement('li');
+
+// // // give new element some content
+//  liEl.textContent = 'This is my list of items.';
+
+// // // append the child element to the parent element
+//  pEl.appendChild(liEl);
+
+//  Location.prototype.writeList = function(array, elementId){
+//     var array = this.locArr;
+//     var elementId = this.elementId;
+//     var name = this.name;
+//     var tdEl = document.createElement('td');
+//     tdEl.textContent = name;
+//     elementId.appendChild(tdEl);
+//     for (var i = 0; i < array.length; i++){
+//         var tdEl = document.createElement('td');
+//         tdEl.textContent = array[i];
+//         elementId.appendChild(tdEl);
+// }
+
+// Location.prototype.writeList = function(){
+//     var row = document.getElementById(this.elementId);
+//     var tdEl = document.createElement('td');
+//     tdEl.textContent = this.name;
+//     row.appendChild(tdEl);
+//     for (var i = 0; i < this.locArr.length; i++){
+//         var tdEl = document.createElement('td');
+//         tdEl.textContent = this.locArr[i];
+//         row.appendChild(tdEl);
+// }
+
+
+// locationArr[5].writeList(this.locArr, this.uEl);
+
+// THE NEW table row has been rendered
+//I now want to:
+//calculate the new locations hourly totals --> done with calcNewLoc
+//push those totals into the new Location's locArr --> done with calcNewLoc
+//calculate the Loctot --> done with calcNewLoc
+//I SHOULD REFACTOR MY CODE TO RUN THOSE LOOPS IN THE OBJECT INSTEAD OF A SEPARATE FOR LOOP?
+//then push the new location's index in locArr into tds which are appended into the newly created tr
+
+
+
+
+
+//write this in a new render function
+// locationArr[5].writeList(this.locArr, this.uEl);
+
+
+
+
+
+// var hourTotArr = [];
+// function hourTotCalc(){
+//     var j = 0;
+//     var counter = locationArr[j].locArr.length
+//     for (var j = 0; j < counter; j++){
+//         var hourTotal = 0;
+//         for (var i = 0; i < locationArr.length; i++){
+//             hourTotal += locationArr[i].locArr[j];
+//         }
+//         hourTotArr.push(hourTotal);
+//     }
+// } 
+
+// function hoursTotWrite (array, elementId){
+//     hourTotCalc();
+//     var totEl = document.getElementById(elementId)
+//     var name = 'Totals';
+//     var tdEl = document.createElement('td');
+//     tdEl.textContent = name;
+//     totEl.appendChild(tdEl);
+//     for (var i = 0; i < array.length; i++){
+
+//         var tdEl = document.createElement('td');
+
+//         tdEl.textContent = array[i];
+
+//         totEl.appendChild(tdEl);
+//     }
+// }
+
+// hoursTotWrite(hourTotArr, 'tottab');
+// headerWrite(tableHeadArr, 'tabhead');
