@@ -208,9 +208,8 @@ function handleSubmit(event){
     console.log(locationArr);
     newLocationTrRender(elId);
     calcNewLoc();
-
-
 }
+
 function newLocationTrRender(elementId){
     var table = document.getElementById('table');
     var newTrEl = document.createElement('tr');
@@ -326,3 +325,27 @@ function calcNewLoc(){
 
 // hoursTotWrite(hourTotArr, 'tottab');
 // headerWrite(tableHeadArr, 'tabhead');
+
+// var body = getelementsbytagname('body');
+
+
+//HELPER CREATE ELEMENT FUNCTION FROM 4/21 DEMO 
+
+function createElement(element, content, parent){
+    var newElement = document.createElement(element);
+    newElement.textContent = content;
+    parent.appendChild(newElement);
+    return newElement;
+}
+
+//if you declare the parent as a variable earlier in the code you 
+//can just plug it in instead of getting by tag name
+createElement('h1','hellow wolrd', document.getElementsByTagName('body')[0]);
+
+
+// false turns off console logs, true turns them on
+var debug = false
+
+if (debug) {
+    console.log(variable)
+}
